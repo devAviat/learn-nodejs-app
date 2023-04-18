@@ -3,6 +3,9 @@ const request = require('request');
 const express = require('express');
 const app = express();
 
+//dotenv 추가
+require('dotenv').config();
+
 app.set('port', process.env.PORT || 8080);
 
 app.use(morgan('dev'));
@@ -11,8 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 
 /* 라우팅 설정 */
 app.get('/naver/news', (req, res) => {
-    const client_id = '발급받은 client id';
-    const client_secret = '발급받은 client secret';
+    const client_id = process.env.NAVER_CLIENT;
+    const client_secret = process.env.NAVER_SECRET;
     const api_url =
         'https://openapi.naver.com/v1/search/news?query=' + encodeURI('코스피'); //encodeURI(req.query.query);
     const option = {};
